@@ -21,7 +21,14 @@ namespace API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var docentes = context.Usuarios.Where(x => x.Eliminado == 0).Select(x => new DocenteDTO()
+            //User.Identity.Name -- Tendria acceso a la claim name
+
+            var idDepto = User.Claims.Where(x => x.Type == "Id").Select(x => int.Parse(x.Value)).FirstOrDefault();
+
+
+
+
+            var docentes = context.Usuarios.Where(x => x.Eliminado == 0 && x.IdDepartamento==idDepto).Select(x => new DocenteDTO()
             {
                 Id = x.Id,
                 Correo = x.Correo??"", //null-coalescence operator
@@ -31,5 +38,7 @@ namespace API.Controllers
 
             return Ok(docentes);
         }
+
+        
     }
 }
