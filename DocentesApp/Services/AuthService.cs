@@ -32,7 +32,6 @@ namespace DocentesApp.Services
         {
             SecureStorage.Remove("JwtToken");
             token = null;
-            token = null;
         }
     }
 }
