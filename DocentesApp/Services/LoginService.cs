@@ -11,15 +11,19 @@ namespace DocentesApp.Services
 {
     public class LoginService
     {
+        private readonly AuthService auth;
         public string url = "https://docentes.itesrc.net/";
         HttpClient client;
-        public LoginService()
+        public LoginService(AuthService auth)
         {
             //Le paso la url al httpclient
             client= new HttpClient()
             {
                 BaseAddress = new Uri(url)
             };
+            this.auth = auth;
+
+            
         }
 
         public async Task<bool> IniciarSesion(LoginDTO login)
@@ -36,13 +40,19 @@ namespace DocentesApp.Services
                 //read token
                 var token = await request.Content.ReadFromJsonAsync<string>();
 
-
+                auth.WriteToken(token);
                 return true;
             }
             else 
             {
                 return false;
             }
+        }
+
+        public void Logout()
+        {
+            auth.RemoveToken();
+            Shell.Current.GoToAsync("/login");
         }
     }
 }
