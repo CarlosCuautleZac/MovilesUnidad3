@@ -12,7 +12,7 @@ namespace DocentesApp.Services
     public class LoginService
     {
         private readonly AuthService auth;
-        public string url = "https://docentes.itesrc.net/";
+        public string url = "https://seguridaddocentes.itesrc.net/";
         HttpClient client;
         public LoginService(AuthService auth)
         {
@@ -28,7 +28,7 @@ namespace DocentesApp.Services
 
         public async Task<bool> IniciarSesion(LoginDTO login)
         {
-            if (string.IsNullOrWhiteSpace(login.Username)||string.IsNullOrWhiteSpace(login.Password))
+            if (string.IsNullOrWhiteSpace(login.Usuario)||string.IsNullOrWhiteSpace(login.Contraseña))
             {
                 throw new ArgumentException("Escriba el nombre de usuario o contraseña");
             }
@@ -38,13 +38,14 @@ namespace DocentesApp.Services
             {
 
                 //read token
-                var token = await request.Content.ReadFromJsonAsync<string>();
+                var token = await request.Content.ReadAsStringAsync();
 
                 auth.WriteToken(token);
                 return true;
             }
             else 
             {
+                var message = request.Content.ReadAsStringAsync();
                 return false;
             }
         }

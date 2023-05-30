@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"            
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DocentesApp.Views.Login.LoginView"
-             Title="Iniciar sesión">
+             xmlns:vm ="clr-namespace:DocentesApp.ViewModels"
+             x:Class="DocentesApp.Views.Login.LoginView" x:DataType="vm:LoginViewModel"
+             Title="Iniciar sesión" >
 
     <VerticalStackLayout Margin="1" Spacing="5">
-        <Label Text="Iniciar sesión" FontSize="Large" HorizontalTextAlignment="Center"></Label>
+        <!--<Label Text="Iniciar sesión" FontSize="Large" HorizontalTextAlignment="Center"></Label>-->
 
         <Label Text="Nombre de usuario:"></Label>
-        <Entry></Entry>
+        <Entry Text="{Binding Credenciales.Usuario}"></Entry>
 
         <Label Text="Contraseña:"></Label>
-        <Entry IsPassword="True"></Entry>
+        <Entry Text="{Binding Credenciales.Contraseña}" IsPassword="True"></Entry>
 
-        <Button Text="Iniciar sesión"></Button>
+        <Button Command="{Binding IniciarSesionCommand}" Text="Iniciar sesión"></Button>
 
 
-        <Entry Text="Mensaje de error" Margin="10" FontSize="Small" 
+        <Entry Text="{Binding Mensaje}" Margin="10" FontSize="Small" 
                TextColor="Red" HorizontalTextAlignment="Center"></Entry>
         
     </VerticalStackLayout>
