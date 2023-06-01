@@ -38,6 +38,10 @@ namespace DocentesApp.ViewModels
                     {
                         Mensaje = "Nombre de usuario o contraseña incorrectas";
                     }
+                    else
+                    {
+                       await Shell.Current.GoToAsync("main");
+                    }
                 }
                 else
                     Mensaje = "No hay conexion a internet";

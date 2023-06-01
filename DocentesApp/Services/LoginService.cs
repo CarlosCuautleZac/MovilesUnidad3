@@ -50,10 +50,10 @@ namespace DocentesApp.Services
             }
         }
 
-        public void Logout()
+        public async void Logout()
         {
             auth.RemoveToken();
-            Shell.Current.GoToAsync("/login");
+            await Shell.Current.GoToAsync("login");
         }
     }
 }

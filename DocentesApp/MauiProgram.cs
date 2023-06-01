@@ -1,4 +1,6 @@
 ﻿using DocentesApp.Services;
+using DocentesApp.Views.Docentes;
+using DocentesApp.Views.Login;
 using Microsoft.Extensions.Logging;
 
 namespace DocentesApp
@@ -25,8 +27,12 @@ namespace DocentesApp
             builder.Services.AddSingleton<LoginService>();
             builder.Services.AddSingleton<AuthService>();
 
+            //WORKAROUND
+            builder.Services.AddSingleton<LoginView>();
+            builder.Services.AddSingleton<DocentesView>();
+
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

@@ -1,4 +1,7 @@
-﻿using DocentesApp.Services;
+﻿
+using DocentesApp.Services;
+using DocentesApp.Views.Docentes;
+using DocentesApp.Views.Login;
 
 namespace DocentesApp
 {
@@ -6,6 +9,8 @@ namespace DocentesApp
     {
         public App(AuthService auth, LoginService login)
         {
+            Routing.RegisterRoute("main", typeof(DocentesView));
+            Routing.RegisterRoute("login", typeof(LoginView));
             InitializeComponent();
 
             MainPage = new AppShell(auth, login);
